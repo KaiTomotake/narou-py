@@ -8,7 +8,9 @@ class ProxyType(enum.Enum):
 class Client:
     BASE = "https://api.syosetu.com"
 
-    def __init__(self, proxies: dict[ProxyType, str]) -> None:
+    def __init__(self, proxies: dict[ProxyType, str] | None = None) -> None:
+        if proxies is None:
+            return
         self.proxies = dict()
         for proxy_type, url in proxies.items():
             result = urllib.parse.urlparse(url)
